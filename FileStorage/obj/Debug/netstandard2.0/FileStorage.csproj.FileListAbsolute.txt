@@ -1,0 +1,10 @@
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\bin\Debug\netstandard2.0\FileStorage.deps.json
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\bin\Debug\netstandard2.0\FileStorage.dll
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\bin\Debug\netstandard2.0\FileStorage.pdb
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.csproj.AssemblyReference.cache
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.AssemblyInfoInputs.cache
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.AssemblyInfo.cs
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.csproj.CoreCompileInputs.cache
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.dll
+C:\Users\Редисочка\Desktop\Для учёбы №2\Проекты C# 16.11.2022 -\Тестирование\UnitTestEx\UnitTestEx\FileStorage\obj\Debug\netstandard2.0\FileStorage.pdb
