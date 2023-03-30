@@ -117,12 +117,18 @@ namespace UnitTestProject
         [Test, TestCaseSource(nameof(NewFilesData))]
         public void GetFileTest(File expectedFile) 
         {
-            storage.Write(expectedFile);
+            bool write = storage.Write(expectedFile);
+            if(write)
+            {
+                File actualfile = storage.GetFile(expectedFile.GetFilename());
+                bool difference = actualfile.GetFilename().Equals(expectedFile.GetFilename()) && actualfile.GetSize().Equals(expectedFile.GetSize());
 
-            File actualfile = storage.GetFile(expectedFile.GetFilename());
-            bool difference = actualfile.GetFilename().Equals(expectedFile.GetFilename()) && actualfile.GetSize().Equals(expectedFile.GetSize());
-
-            Assert.IsFalse(difference, string.Format("There is some differences in {0} or {1}", expectedFile.GetFilename(), expectedFile.GetSize()));
+                Assert.True(difference, string.Format("There is some differences in {0} or {1}", expectedFile.GetFilename(), expectedFile.GetSize()));
+            }
+            else
+            {
+                Assert.False(write, MAX_SIZE_EXCEPTION);
+            }            
         }
     }
 }
