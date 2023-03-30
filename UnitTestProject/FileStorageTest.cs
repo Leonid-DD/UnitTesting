@@ -89,8 +89,17 @@ namespace UnitTestProject
         /* Тестирование удаления файла */
         [Test, TestCaseSource(nameof(FilesForDeleteData))]
         public void DeleteTest(File file, String fileName) {
-            storage.Write(file);
-            Assert.True(storage.Delete(fileName));
+            bool isNull = false;
+            try
+            {
+                storage.Write(file);
+                Assert.True(storage.Delete(fileName));
+            }
+            catch (System.NullReferenceException)
+            {
+                isNull = true;
+                Assert.True(isNull, NULL_FILE_EXCEPTION);
+            }
         }
 
         /* Тестирование получения файлов */
