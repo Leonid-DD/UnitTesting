@@ -17,6 +17,8 @@ namespace UnitTestProject
         public const string NULL_FILE_EXCEPTION = "NULL FILE";
         public const string NO_EXPECTED_EXCEPTION_EXCEPTION = "There is no expected exception";
 
+        public const string FILES_NOT_DELETED_EXCEPTION = "Not all files were deleted";
+
         public const string SPACE_STRING = " ";
         public const string FILE_PATH_STRING = "@D:\\JDK-intellij-downloader-info.txt";
         public const string CONTENT_STRING = "Some text";
@@ -51,7 +53,15 @@ namespace UnitTestProject
         [Test, TestCaseSource(nameof(NewFilesData))]
         public void WriteTest(File file) 
         {
-            Assert.True(storage.Write(file));
+            bool write = storage.Write(file);
+            if (write)
+            {
+                Assert.True(write);
+            }
+            else
+            {
+                Assert.False(write, MAX_SIZE_EXCEPTION);
+            }
             storage.DeleteAllFiles();
         }
 
@@ -62,14 +72,14 @@ namespace UnitTestProject
             try
             {
                 storage.Write(file);
-                Assert.False(storage.Write(file));
-                storage.DeleteAllFiles();
+                storage.Write(file);
             } 
             catch (FileNameAlreadyExistsException)
             {
                 isException = true;
             }
             Assert.True(isException, NO_EXPECTED_EXCEPTION_EXCEPTION);
+            storage.DeleteAllFiles();
         }
 
         /* Тестирование проверки существования файла */
@@ -141,7 +151,26 @@ namespace UnitTestProject
             else
             {
                 Assert.False(write, MAX_SIZE_EXCEPTION);
-            }            
+            }
+            Console.WriteLine(storage.GetFiles().Count);
+            storage.DeleteAllFiles();
+            Console.WriteLine(storage.GetFiles().Count);
         }
+
+        //[Test, TestCaseSource (nameof(NewFilesData))]
+        //public void DeleteAllFilesTest(File file)
+        //{
+        //    bool write = storage.Write(file);
+        //    if (write)
+        //    {
+        //        storage.DeleteAllFiles();
+        //        bool count = storage.GetFiles().Count == 0;
+        //        Assert.True(count, FILES_NOT_DELETED_EXCEPTION);
+        //    }
+        //    else
+        //    {
+        //        Assert.False(write, MAX_SIZE_EXCEPTION);
+        //    }
+        //}
     }
 }

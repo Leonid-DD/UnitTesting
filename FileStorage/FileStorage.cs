@@ -108,7 +108,7 @@ namespace UnitTestEx
          */
         public bool DeleteAllFiles()
         {
-            files.RemoveRange(0, files.Count - 1);
+            files.RemoveRange(0, files.Count);
             return files.Count == 0;
         }
 
