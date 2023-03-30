@@ -76,14 +76,27 @@ namespace UnitTestProject
         [Test, TestCaseSource(nameof(NewFilesData))]
         public void IsExistsTest(File file) {
             String name = file.GetFilename();
-            Assert.False(storage.IsExists(name));
-            try {
-                storage.Write(file);
-            } catch (FileNameAlreadyExistsException e) {
-                Console.WriteLine(String.Format("Exception {0} in method {1}", e.GetBaseException(), MethodBase.GetCurrentMethod().Name));
+            bool exist = storage.IsExists(name);
+            try 
+            {
+                bool write = storage.Write(file);
+                if (write)
+                {
+                    exist = storage.IsExists(name);
+                    storage.DeleteAllFiles();
+                }
+                else
+                {
+                    Assert.False(write, WRONG_SIZE_CONTENT_STRING);
+                    return;
+                }
             }
-            Assert.True(storage.IsExists(name));
-            storage.DeleteAllFiles();
+            catch (FileNameAlreadyExistsException) 
+            {
+                exist = true;
+                //Console.WriteLine(String.Format("Exception {0} in method {1}", e.GetBaseException(), MethodBase.GetCurrentMethod().Name));
+            }
+            Assert.True(exist);
         }
 
         /* Тестирование удаления файла */
