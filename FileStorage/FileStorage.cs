@@ -75,6 +75,7 @@ namespace UnitTestEx
          * @return result of file deleting
          */
         public bool Delete(String fileName) {
+            availableSize += GetFile(fileName).GetSize();
             return files.Remove(GetFile(fileName));
         }
 
@@ -108,7 +109,11 @@ namespace UnitTestEx
          */
         public bool DeleteAllFiles()
         {
-            files.RemoveRange(0, files.Count);
+            for (int i = 0; i < files.Count; i++)
+            {
+                availableSize += files[i].GetSize();
+                Delete(files[i].GetFilename());
+            }
             return files.Count == 0;
         }
 

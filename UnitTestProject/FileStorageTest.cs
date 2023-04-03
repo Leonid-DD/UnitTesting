@@ -18,6 +18,8 @@ namespace UnitTestProject
         public const string NO_EXPECTED_EXCEPTION_EXCEPTION = "There is no expected exception";
 
         public const string FILES_NOT_DELETED_EXCEPTION = "Not all files were deleted";
+        public const string FILES_NOT_IN_STORAGE_EXCEPTION = "Storage do not contain all expected files";
+        public const string WRITE_FAIL_EXCEPTION = "Write failed";
 
         public const string SPACE_STRING = " ";
         public const string FILE_PATH_STRING = "@D:\\JDK-intellij-downloader-info.txt";
@@ -157,20 +159,57 @@ namespace UnitTestProject
             Console.WriteLine(storage.GetFiles().Count);
         }
 
-        //[Test, TestCaseSource (nameof(NewFilesData))]
-        //public void DeleteAllFilesTest(File file)
-        //{
-        //    bool write = storage.Write(file);
-        //    if (write)
-        //    {
-        //        storage.DeleteAllFiles();
-        //        bool count = storage.GetFiles().Count == 0;
-        //        Assert.True(count, FILES_NOT_DELETED_EXCEPTION);
-        //    }
-        //    else
-        //    {
-        //        Assert.False(write, MAX_SIZE_EXCEPTION);
-        //    }
-        //}
+        /* Тестирование удаления всех файлов */
+        [Test, TestCaseSource(nameof(NewFilesData))]
+        public void DeleteAllFilesTest(File file)
+        {
+            bool write = storage.Write(file);
+            if (write)
+            {
+                storage.DeleteAllFiles();
+                bool count = storage.GetFiles().Count == 0;
+                Assert.True(count, FILES_NOT_DELETED_EXCEPTION);
+            }
+            else
+            {
+                Assert.False(write, MAX_SIZE_EXCEPTION);
+            }
+        }
+
+        /*Тестирование записи нескольких файлов*/
+        [Test]
+        public void MultipleFilesWriteTest()
+        {
+            string content = CONTENT_STRING;
+            int count = 0;
+            for (int i = 1; i <= 2; i++)
+            {
+                File file = new File(i.ToString(), content);
+                storage.Write(file);
+                count++;
+            }
+            Assert.AreEqual(count, storage.GetFiles().Count, FILES_NOT_IN_STORAGE_EXCEPTION);
+            storage.DeleteAllFiles();
+        }
+
+        /*Тестирование записи файла после полного заполнения хранилища и удаления из него всех файлов*/
+        [Test]
+        public void WriteFile_AfterStorageOverfill_AndAllFilesDeletion()
+        {
+            string content = "testcntent";
+            bool firstWrite = false;
+            for (int i = 1; i <= 21; i++)
+            {
+                File file = new File(i.ToString(), content);
+                firstWrite = storage.Write(file);
+            }
+            if (!firstWrite)
+            {
+                Assert.False(firstWrite, WRITE_FAIL_EXCEPTION);
+            }
+            storage.DeleteAllFiles();
+            File testFile = new File("testFile", content);
+            Assert.True(storage.Write(testFile));
+        }
     }
 }
